@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Crypto.Engines;
 using System.Data;
 
 namespace ORM_Dapper
@@ -17,6 +18,23 @@ namespace ORM_Dapper
 
             IDbConnection conn = new MySqlConnection(connString);
 
+
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Clear();
+
+            Console.WriteLine("Departments: ");
+            Thread.Sleep(1000);
+            Console.Write("Loading ");
+            for (int i = 0; i < 5; i++)
+            {
+                Thread.Sleep(1000);
+                Console.Write(". ");
+            }
+            Console.WriteLine();
+
+            #region Department Section
+
             var departmentRepo = new DapperDepartmentRepository(conn);
 
             var departments = departmentRepo.GetAllDepartments();
@@ -28,6 +46,47 @@ namespace ORM_Dapper
                 Console.WriteLine();
 
             }
+
+            #endregion
+
+            Console.WriteLine("Products: ");
+            Thread.Sleep(1000);
+            Console.Write("Loading ");
+            for (int i = 0; i < 5; i++)
+            {
+                Thread.Sleep(1000);
+                Console.Write(". ");
+            }
+            Console.WriteLine();
+
+
+            #region Product Section
+
+            var productRepository = new DapperProductRepository(conn);
+
+            var products = productRepository.GetAllProducts();
+
+            foreach (var product in products)
+            {
+
+                Console.WriteLine($"ProductID: {product.ProductID}");
+                Console.WriteLine($"Name: {product.Name}");
+                Console.WriteLine($"Price: {product.Price}");
+                Console.WriteLine($"CategoryID: {product.CategoryID}");
+                Console.WriteLine($"On sale (t/f):{product.OnSale}");
+                Console.WriteLine($"Stock level{product.StockLevel}");
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Console.WriteLine(". . . . . . . . . .");
+                Console.WriteLine();
+
+            }
+
+            #endregion
+
+
+
 
         }
     }
