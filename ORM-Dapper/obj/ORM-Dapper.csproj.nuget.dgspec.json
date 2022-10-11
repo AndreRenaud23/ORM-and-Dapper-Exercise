@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.31, )"
+            },
             "MySql.Data.EntityFramework": {
               "target": "Package",
               "version": "[8.0.30, )"
